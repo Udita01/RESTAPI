@@ -8,6 +8,9 @@ const mongoose = require('mongoose');
 const productRoutes=require('./api/routes/products')
 const orderRoutes=require('./api/routes/orders')
 const userRoutes=require('./api/routes/user')
+const employeeRoutes=require('./api/routes/employee')
+const bookingRoutes=require('./api/routes/booking')
+const customerRoutes=require('./api/routes/customer')
 
 // app.use((req, res, next)=>{
 //     res.status(200).json({
@@ -28,12 +31,13 @@ app.use(bodyParser.json());
 
 //code to handle cors error
 app.use((req, res,next)=>{
-    res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Header","Origin, X-Requested-Width,Content-Type,Accept,Authorization");
-    res.header("Access-Control-Allow-Credentials",true);
+    res.header("Access-Control-Allow-Origin","*")
+    res.header("Access-Control-Allow-Headers","Origin,X-Requested-Width,Content-Type,Accept,Authorization")
+    res.header("Access-Control-Allow-Credentials",true)
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE")
     if(res.header==="OPTIONS"){
-        res.header("Access-Control-Allow-Method","PUT","POST","DELETE","GET");
-        return res.status(200).json();
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE")
+        return res.status(200).json()
     }
     next();
 })
@@ -41,6 +45,9 @@ app.use((req, res,next)=>{
 app.use("/products",productRoutes);
 app.use("/orders",orderRoutes);
 app.use("/user",userRoutes);
+app.use("/employee",employeeRoutes);
+app.use("/booking",bookingRoutes);
+app.use("/customer",customerRoutes);
 
 
 //handle error by using middleware
